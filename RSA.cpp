@@ -27,6 +27,23 @@ int main(int argc, char *argv[])
 		// Generate public and private key
 		case 0:
 		{
+			ifstream inFile(argv[2]);
+			string key_counter_str = "-1";
+			int key_counter;
+
+			if(inFile)
+			{
+				getline(inFile, key_counter_str);
+				cout << key_counter_str << "ADSFASDFASDF" << endl;
+			}
+			
+			inFile.close();
+			key_counter = std::stoi(key_counter_str) + 1;
+
+			ofstream out_key(argv[2]);
+			out_key << key_counter << endl;
+			out_key.close();
+
 			long long public_key = 0;
 			long long private_key = 0;
 
@@ -47,7 +64,7 @@ int main(int argc, char *argv[])
 			public_key = generate_key(public_seed);
 			private_key = generate_key(private_seed);
 
-			ofstream outFile ("keys.txt");
+			ofstream outFile ("key" + std::to_string(key_counter) + ".txt");
 
 			cout << "public key: " << public_key << endl;
 			cout << "private key: " << private_key << endl;
@@ -93,8 +110,7 @@ bool prime_test(int number)
 	if(number % 2 == 0)
 		return false;
 
-	int k = 0, 
-		a = 0;
+	int k = 0;
 	long long m = number-1;
 
 	while(!(m&1))
