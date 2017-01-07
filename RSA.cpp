@@ -4,8 +4,8 @@
 #include <random>
 #include <iostream>
 #include <fstream>
-
-#define PRECISION 100000
+#include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -13,6 +13,7 @@ int generate_key(int seed);
 bool prime_test(int number);
 long long get_value(int a, long long m, long long number);
 int encrypt_message(string str);
+// long long exponent(long long base, long long exponent);
 
 int main(int argc, char *argv[])
 {
@@ -32,8 +33,8 @@ int main(int argc, char *argv[])
 			int key_counter;
 
 			if(inFile)
-			{
-				getline(inFile, key_counter_str);
+				{
+					getline(inFile, key_counter_str);
 				cout << key_counter_str << "ADSFASDFASDF" << endl;
 			}
 			
@@ -76,6 +77,10 @@ int main(int argc, char *argv[])
 		}
 		case 1:
 		{
+			// string test_word = "Hasjfads;fasjflasdjf;ladsfj;fadsfdasfadsfadsfadsfadsfadsfadsfadsfas;lfkjads;fkljads;flajd;lfadj";
+			// size_t hashed_word = std::hash<std::string>{}(test_word);
+			// cout << "the hash is " << hashed_word << endl;
+			// string something =  std::hash<std:s:tring>{}(hashed_word);
 			break;
 		}
 		case 2:
@@ -100,8 +105,64 @@ int generate_key(int seed)
 			break;
 		number++;
 	}
+	// if(prime_test(number))
+	// 	return number;
 	return number;
 }
+
+// bool prime_test(int number)
+// {
+// 	if(number%2 == 0)
+// 		return false;
+
+// 	long long a[] = {2, 3, 5, 7, 11, 13, 17, 19, 23};
+
+// 	// finding n-1 = 2^k * m
+// 	int divider = 2,
+// 		temp = 1,
+// 		n = number-1,
+// 		k = 1,
+// 		m = 1;
+
+// 	temp = n/divider;
+
+// 	while((temp * divider) == n)
+// 	{
+// 		m = temp;
+// 		divider *= 2;
+// 		k++;
+// 		temp = n/divider;
+// 	}
+// 	k--;
+// 	cout << "k = " << k << "   m = " << m << endl;
+// 	// compute b_0 = a^m mod n or b_0^2 mod n if needed
+// 	for(int i=0; i<9; i++)
+// 	{
+// 		long long b_0 = exponent(a[i], (long long) m) % number;
+// 		cout << "b_0 = " << b_0;
+// 		if(b_0 == 1 || b_0 == -1)
+// 			continue;
+// 		long long b_1 = exponent(b_0, 2) % 53 - number;
+// 		cout << "   b_1 = "<< b_1 << endl;
+// 		if(b_1 == 1)
+// 			return false;
+// 		else
+// 			continue;
+// 	}
+
+// 	return true;
+// }
+
+// long long exponent(long long base, long long exponent)
+// {
+// 	long long value = 1;
+// 	for(long long i=0; i<exponent; i++)
+// 	{
+// 		value *= base;
+// 	}
+// 	// cout << "the value   " << (int) value << endl;
+// 	return value;
+// }
 
 bool prime_test(int number)
 {
@@ -115,8 +176,8 @@ bool prime_test(int number)
 
 	while(!(m&1))
 	{
-		// cout << k << "  ";
-		// cout << m << endl;
+		cout << k << "  ";
+		cout << m << endl;
 		k++;
 		m /= 2;
 	}
